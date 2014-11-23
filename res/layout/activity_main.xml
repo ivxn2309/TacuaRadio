@@ -8,9 +8,32 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="peida.app.tacuaradio.MainActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/main_image"
+        android:layout_width="fill_parent"
+        android:layout_height="250dp"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/icon_description"
+        android:src="@drawable/logo" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignLeft="@+id/main_image"
+        android:layout_below="@+id/main_image"
+        android:orientation="horizontal" >
+
+        <ToggleButton
+            android:id="@+id/power_button"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:background="#ddd"
+            android:textColor="#000"
+            android:textOn="Encendido"
+            android:textOff="Apagado"
+            android:textAppearance="@style/TextAppearance.AppCompat.Base.SearchResult.Title"
+            android:typeface="monospace"
+            android:text="@string/power_button" />
+    </LinearLayout>
 
 </RelativeLayout>
