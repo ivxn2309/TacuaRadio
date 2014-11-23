@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.media.MediaPlayer;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -12,6 +13,18 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MediaPlayer player = new MediaPlayer();
+        try {
+        	String streamingAddr = "http://50.22.217.113:29446/";
+        	player.setDataSource(streamingAddr);
+        	player.prepare();
+        	player.start();
+        }catch(Exception ex){
+        	ex.printStackTrace();
+        }finally{
+        	if (player.isPlaying())
+        		player.stop();
+        }
     }
 
 
