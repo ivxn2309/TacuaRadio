@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">TacuaRadio</string>
-    <string name="power_button">Encendido</string>
+    <string name="power_button">Radio</string>
     <string name="icon_description">Imagen principal de la aplicacion</string>
     <string name="action_settings">Configuracion</string>
 

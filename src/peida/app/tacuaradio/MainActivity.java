@@ -10,16 +10,12 @@ import java.util.regex.Pattern;
 
 import org.apache.http.util.ByteArrayBuffer;
 
-import android.support.v7.app.ActionBarActivity;
-import android.telephony.TelephonyManager;
-import android.os.Bundle;
-import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -30,7 +26,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         
         MediaPlayer player = new MediaPlayer();
-        String url = "http://50.22.217.113:29446";
+        String url = "http://tacuaradio.listen2myradio.com?serverip=50.22.217.113&serverport=29446&radioname=2200034";
         String streamingAddr = getStreamingURL(url);
         
         try {
@@ -50,11 +46,6 @@ public class MainActivity extends ActionBarActivity {
         player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 			@Override
 			public void onPrepared(MediaPlayer stream) {
-				// Set the Wake Lock - CPU on, keyboard and screen off
-				PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-				WakeLock wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK,
-						getString(R.string.app_name));
-				wl.acquire();
 				stream.start();
 			}
 		});
@@ -93,7 +84,7 @@ public class MainActivity extends ActionBarActivity {
 		try {
 			URL updateURL = new URL(string);
 			URLConnection conn = updateURL.openConnection();
-			conn.setConnectTimeout(5000);
+			conn.setConnectTimeout(6000);
 			InputStream is = conn.getInputStream();
 			BufferedInputStream bis = new BufferedInputStream(is);
 			ByteArrayBuffer baf = new ByteArrayBuffer(50);
