@@ -69,6 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/boton1"
+            android:onClick="stopStreaming"
             android:src="@drawable/control_stop_grey" />
 
         <ImageButton
@@ -76,6 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/boton2"
+            android:onClick="unpauseStreaming"
             android:src="@drawable/control_play_grey" />
 
         <ImageButton
@@ -83,6 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/boton3"
+            android:onClick="pauseStreaming"
             android:src="@drawable/control_pause_grey" />
         
         <ImageButton

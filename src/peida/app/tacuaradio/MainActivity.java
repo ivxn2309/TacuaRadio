@@ -1,14 +1,6 @@
 package peida.app.tacuaradio;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.apache.http.util.ByteArrayBuffer;
 
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -53,15 +45,38 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
     
+    public void stopStreaming(View view){
+    	Toast.makeText(this, "Detenido", Toast.LENGTH_LONG).show();
+		mPlayer.stop();
+    }
+    
+    public void pauseStreaming(View view){
+    	Toast.makeText(this, "Pausa", Toast.LENGTH_LONG).show();
+		mPlayer.pause();
+    }
+    
+    public void unpauseStreaming(View view){
+    	mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+			@Override
+			public void onPrepared(MediaPlayer stream) {
+				stream.start();
+			}
+		});
+        Toast.makeText(this, "Listo", Toast.LENGTH_SHORT).show();
+        try {
+        	mPlayer.prepare();
+        }catch(Exception ex){
+        	ex.printStackTrace();
+        }
+    }
+    
     public void startStreaming(View view){
     	Switch sw = (Switch)findViewById(R.id.power_button);
     	if(sw.isChecked()){
     		Toast.makeText(this, "Encendiendo Radio...", Toast.LENGTH_SHORT).show();
-    		String streamingAddr = getStreamingURL(mUrl);
-    		Toast.makeText(this, "Conectando a: " + streamingAddr, Toast.LENGTH_SHORT).show();
+    		String streamingAddr = mUrl;
             try {
     			mPlayer.setDataSource(streamingAddr);
-    			Toast.makeText(this, "Id de sesion: " + mPlayer.getAudioSessionId(), Toast.LENGTH_SHORT).show();
     		} catch (IllegalArgumentException e) {
     			e.printStackTrace();
     		} catch (SecurityException e) {
@@ -89,46 +104,8 @@ public class MainActivity extends ActionBarActivity {
             }
     	}
     	else{
-    		Toast.makeText(this, "Off", Toast.LENGTH_LONG).show();
+    		Toast.makeText(this, "Apagando Radio", Toast.LENGTH_LONG).show();
+    		mPlayer.stop();
     	}
     }
-    
-    //Prepara una URL para ser usada
-    public String getStreamingURL(String string) {
-    	Toast.makeText(this, "URL: " + string, Toast.LENGTH_SHORT).show();
-		String html = "";
-		String result = "";
-		try {
-			URL updateURL = new URL(string);
-			URLConnection conn = updateURL.openConnection();
-			conn.setConnectTimeout(6000);
-			InputStream is = conn.getInputStream();
-			BufferedInputStream bis = new BufferedInputStream(is);
-			ByteArrayBuffer baf = new ByteArrayBuffer(50);
-
-			int current = 0;
-			while ((current = bis.read()) != -1) {
-				baf.append((byte) current);
-			}
-
-			html = new String(baf.toByteArray());
-			Toast.makeText(this, "HTML: " + html, Toast.LENGTH_SHORT).show();
-			String re1 = ".*?"; // Non-greedy match on filler
-			String re2 = "((?:http|https)(?::\\/{2}[\\w]+)(?:[\\/|\\.]?)(?:[^\\s\"]*))"; // HTTP
-			// URL
-			// 1
-
-			Pattern p = Pattern.compile(re1 + re2, Pattern.CASE_INSENSITIVE
-					| Pattern.DOTALL);
-			Matcher m = p.matcher(html);
-			if (m.find()) {
-				String httpurl1 = m.group(1);
-				result = httpurl1.toString();
-			} 
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return string;
-	}
 }
