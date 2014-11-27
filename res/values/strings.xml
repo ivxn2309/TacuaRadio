@@ -5,5 +5,12 @@
     <string name="power_button">Radio</string>
     <string name="icon_description">Imagen principal de la aplicacion</string>
     <string name="action_settings">Configuracion</string>
+    
+    <string name="boton1">Boton de alto</string>
+    <string name="boton2">Boton de play</string>
+    <string name="boton3">Boton de pausa</string>
+    <string name="boton4">Boton de micro</string>
+    <string name="boton5">Boton de configuraciones</string>
+    
 
 </resources>

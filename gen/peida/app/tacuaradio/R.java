@@ -1077,8 +1077,15 @@ containing a value of this type.
         public static final int abc_textfield_searchview_holo_light=0x7f020054;
         public static final int abc_textfield_searchview_right_holo_dark=0x7f020055;
         public static final int abc_textfield_searchview_right_holo_light=0x7f020056;
-        public static final int ic_launcher=0x7f020057;
-        public static final int logo=0x7f020058;
+        public static final int control_pause_grey=0x7f020057;
+        public static final int control_play_grey=0x7f020058;
+        public static final int control_stop_grey=0x7f020059;
+        public static final int ic_launcher=0x7f02005a;
+        public static final int ic_tab_artists_grey=0x7f02005b;
+        public static final int ic_tab_hdone_grey=0x7f02005c;
+        public static final int ic_tab_hdtwo_grey=0x7f02005d;
+        public static final int ic_tab_options_grey=0x7f02005e;
+        public static final int logo=0x7f02005f;
     }
     public static final class id {
         public static final int action_bar=0x7f09001c;
@@ -1092,7 +1099,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f090002;
         public static final int action_menu_presenter=0x7f090003;
         public static final int action_mode_close_button=0x7f090024;
-        public static final int action_settings=0x7f090046;
+        public static final int action_settings=0x7f090048;
         public static final int activity_chooser_view_content=0x7f090025;
         public static final int always=0x7f09000f;
         public static final int back1=0x7f09003c;
@@ -1117,6 +1124,8 @@ containing a value of this type.
         public static final int imageButton1=0x7f090043;
         public static final int imageButton2=0x7f090044;
         public static final int imageButton3=0x7f090045;
+        public static final int imageButton4=0x7f090046;
+        public static final int imageButton5=0x7f090047;
         public static final int listMode=0x7f090006;
         public static final int list_item=0x7f090029;
         public static final int main_image=0x7f09003e;
@@ -1252,6 +1261,11 @@ containing a value of this type.
         public static final int abc_shareactionprovider_share_with_application=0x7f0a000b;
         public static final int action_settings=0x7f0a0010;
         public static final int app_name=0x7f0a000d;
+        public static final int boton1=0x7f0a0011;
+        public static final int boton2=0x7f0a0012;
+        public static final int boton3=0x7f0a0013;
+        public static final int boton4=0x7f0a0014;
+        public static final int boton5=0x7f0a0015;
         public static final int icon_description=0x7f0a000f;
         public static final int power_button=0x7f0a000e;
     }
