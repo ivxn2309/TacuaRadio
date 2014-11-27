@@ -1,12 +1,7 @@
-import android.content.res.Resources;
-import android.test.ActivityInstrumentationTestCase2;
-import android.test.AndroidTestCase;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
+package junittest;
 import peida.app.tacuaradio.MainActivity;
 import peida.app.tacuaradio.R;
+import android.test.ActivityInstrumentationTestCase2;
 
 /**
  * Created by Jaime on 27/11/2014.
