@@ -46,6 +46,7 @@
             android:layout_height="50dp"
             android:text="@string/power_button"
             android:textColor="#fff"
+            android:onClick="startStreaming"
             android:typeface="monospace" />
     </LinearLayout>
 

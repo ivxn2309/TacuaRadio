@@ -16,45 +16,21 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Switch;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
+	
+	private MediaPlayer mPlayer = new MediaPlayer();
+	//private String mUrl = "http://yp.shoutcast.com/sbin/tunein-station.pls?id=237660";
+	private String mUrl = "http://listen.radionomy.com/Sax4Love?Title1=Sax4Love&Length1=-1&Version=2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        
-        MediaPlayer player = new MediaPlayer();
-        String url = "http://tacuaradio.listen2myradio.com?serverip=50.22.217.113&serverport=29446&radioname=2200034";
-        String streamingAddr = getStreamingURL(url);
-        
-        try {
-			player.setDataSource(streamingAddr);
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-        
-        player.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        
-        player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-			@Override
-			public void onPrepared(MediaPlayer stream) {
-				stream.start();
-			}
-		});
-        
-        try {
-        	player.prepare();
-        }catch(Exception ex){
-        	ex.printStackTrace();
-        }
+        setContentView(R.layout.activity_main);       
     }
 
 
@@ -77,8 +53,49 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
     
+    public void startStreaming(View view){
+    	Switch sw = (Switch)findViewById(R.id.power_button);
+    	if(sw.isChecked()){
+    		Toast.makeText(this, "Encendiendo Radio...", Toast.LENGTH_SHORT).show();
+    		String streamingAddr = getStreamingURL(mUrl);
+    		Toast.makeText(this, "Conectando a: " + streamingAddr, Toast.LENGTH_SHORT).show();
+            try {
+    			mPlayer.setDataSource(streamingAddr);
+    			Toast.makeText(this, "Id de sesion: " + mPlayer.getAudioSessionId(), Toast.LENGTH_SHORT).show();
+    		} catch (IllegalArgumentException e) {
+    			e.printStackTrace();
+    		} catch (SecurityException e) {
+    			e.printStackTrace();
+    		} catch (IllegalStateException e) {
+    			e.printStackTrace();
+    		} catch (IOException e) {
+    			e.printStackTrace();
+    		}
+            
+            mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            
+            mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+    			@Override
+    			public void onPrepared(MediaPlayer stream) {
+    				stream.start();
+    			}
+    		});
+            Toast.makeText(this, "Iniciado", Toast.LENGTH_SHORT).show();
+            try {
+            	mPlayer.prepare();
+            	Toast.makeText(this, "Preparado", Toast.LENGTH_SHORT).show();
+            }catch(Exception ex){
+            	ex.printStackTrace();
+            }
+    	}
+    	else{
+    		Toast.makeText(this, "Off", Toast.LENGTH_LONG).show();
+    	}
+    }
+    
+    //Prepara una URL para ser usada
     public String getStreamingURL(String string) {
-
+    	Toast.makeText(this, "URL: " + string, Toast.LENGTH_SHORT).show();
 		String html = "";
 		String result = "";
 		try {
@@ -95,7 +112,7 @@ public class MainActivity extends ActionBarActivity {
 			}
 
 			html = new String(baf.toByteArray());
-
+			Toast.makeText(this, "HTML: " + html, Toast.LENGTH_SHORT).show();
 			String re1 = ".*?"; // Non-greedy match on filler
 			String re2 = "((?:http|https)(?::\\/{2}[\\w]+)(?:[\\/|\\.]?)(?:[^\\s\"]*))"; // HTTP
 			// URL
@@ -112,6 +129,6 @@ public class MainActivity extends ActionBarActivity {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return result;
+		return string;
 	}
 }
