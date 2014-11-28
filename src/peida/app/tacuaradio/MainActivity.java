@@ -28,16 +28,12 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
@@ -46,30 +42,31 @@ public class MainActivity extends ActionBarActivity {
     }
     
     public void stopStreaming(View view){
-    	Toast.makeText(this, "Detenido", Toast.LENGTH_LONG).show();
+    	Switch sw = (Switch)findViewById(R.id.power_button);
+    	Toast.makeText(this, "Detenido", Toast.LENGTH_SHORT).show();
+		mPlayer.pause();
 		mPlayer.stop();
+		mPlayer.reset();
+		sw.setChecked(false);
     }
     
     public void pauseStreaming(View view){
-    	Toast.makeText(this, "Pausa", Toast.LENGTH_LONG).show();
+    	Toast.makeText(this, "Pausa", Toast.LENGTH_SHORT).show();
 		mPlayer.pause();
     }
     
     public void unpauseStreaming(View view){
-    	mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-			@Override
-			public void onPrepared(MediaPlayer stream) {
-				stream.start();
-			}
-		});
-        Toast.makeText(this, "Listo", Toast.LENGTH_SHORT).show();
-        try {
-        	mPlayer.prepare();
-        }catch(Exception ex){
-        	ex.printStackTrace();
-        }
+    	mPlayer.start();
     }
     
+    public void recordStreaming(View view){
+    	Toast.makeText(this, "Sin implementar", Toast.LENGTH_SHORT).show();
+    }
+    
+    public void openSettings(View view){
+    	Toast.makeText(this, "Sin implementar", Toast.LENGTH_SHORT).show();
+    }
+
     public void startStreaming(View view){
     	Switch sw = (Switch)findViewById(R.id.power_button);
     	if(sw.isChecked()){
@@ -104,8 +101,10 @@ public class MainActivity extends ActionBarActivity {
             }
     	}
     	else{
-    		Toast.makeText(this, "Apagando Radio", Toast.LENGTH_LONG).show();
+    		Toast.makeText(this, "Apagando Radio", Toast.LENGTH_SHORT).show();
+    		mPlayer.pause();
     		mPlayer.stop();
+    		mPlayer.reset();
     	}
     }
 }

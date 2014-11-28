@@ -54,6 +54,8 @@
         android:id="@+id/volume"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:max="100"
+        android:progress="90"
         android:layout_below="@+id/buttons" />
 
     <LinearLayout
@@ -93,6 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/boton4"
+            android:onClick="recordStreaming"
             android:src="@drawable/ic_tab_artists_grey" />
         
         <ImageButton
@@ -100,6 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/boton5"
+            android:onClick="openSettings"
             android:src="@drawable/ic_tab_options_grey" />
         
     </LinearLayout>
