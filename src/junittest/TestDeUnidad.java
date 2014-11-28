@@ -67,4 +67,26 @@ public class TestDeUnidad extends ActivityInstrumentationTestCase2<MainActivity>
         assertEquals("comparando el estado ON del Switch",expected,sActual);
     }
 
+    /*  Test para cubrir el formato de pantalla           */
+    /*  Se probaran que los layouts de los ImageButtons   */
+    /*  Esten colocados correctamente,                    */
+    /*  Segun lo ya establecido en el diseño              */
+
+     public void testStopButtonLayout() {
+
+        ImageButton mClickMeButton = (ImageButton)
+                mFirstTestActivity
+                        .findViewById(R.id.imageButton1);
+
+        View decorView = mFirstTestActivity.getWindow().getDecorView();
+
+        ViewAsserts.assertOnScreen(decorView, mClickMeButton);
+
+        ViewGroup.LayoutParams layoutParams =
+                mClickMeButton.getLayoutParams();
+        assertNotNull(layoutParams);
+        assertEquals(layoutParams.width, WindowManager.LayoutParams.WRAP_CONTENT);
+        assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
+    }
+
 }
