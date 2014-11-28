@@ -2,6 +2,7 @@ package peida.app.tacuaradio;
 
 import java.io.IOException;
 
+import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -9,6 +10,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -18,11 +21,40 @@ public class MainActivity extends ActionBarActivity {
 	private MediaPlayer mPlayer = new MediaPlayer();
 	//private String mUrl = "http://yp.shoutcast.com/sbin/tunein-station.pls?id=237660";
 	private String mUrl = "http://listen.radionomy.com/Sax4Love?Title1=Sax4Love&Length1=-1&Version=2";
+	private SeekBar mVolumeSeekbar = null;
+    private AudioManager mAudioManager = null; 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);       
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
+        setContentView(R.layout.activity_main);
+        prepareVolumeControl();
+    }
+    
+    private void prepareVolumeControl() {
+        try {
+            mVolumeSeekbar = (SeekBar)findViewById(R.id.volume);
+            mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+            mVolumeSeekbar.setMax(mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
+            mVolumeSeekbar.setProgress(mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC));   
+
+            mVolumeSeekbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+                @Override
+                public void onStopTrackingTouch(SeekBar arg0) {}
+
+                @Override
+                public void onStartTrackingTouch(SeekBar arg0) {}
+
+                @Override
+                public void onProgressChanged(SeekBar arg0, int progress, boolean arg2) {
+                    mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
+                }
+            });
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
