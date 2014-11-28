@@ -1,31 +1,17 @@
 language: android
-
-jdk: oraclejdk7
-
-env:
-  matrix:
-    - ANDROID_TARGET=android-14  ANDROID_ABI=armeabi-v7a
-
 android:
   components:
-    - build-tools-21.1.1
-    - android-14
-    - sysimg-14
+   - build-tools-21.1.1
+   - android-19
+   - sys-img-armeabi-v7a-android-19
 
-  licenses:
-    - android-sdk-license-bcbbd656
-
-before_script:
-  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+    
+    
+    # Emulator Management: Create, Start and Wait
+  before_script:
+  - echo no | android create avd --force -n test -t android-19 --abi armeabi-v7a
   - emulator -avd test -no-skin -no-audio -no-window &
-  - adb wait-for-device
-  - chmod +x ./wait_for_emulator
-  - adb logcat | tee logcat.txt &
-  - ./wait_for_emulator
+  - android-wait-for-emulator
   - adb shell input keyevent 82 &
 
-script: ant -buildfile ./test/build.xml clean emma debug install test
-
-after_script:
-  - pkill -KILL -f tee
-  - pkill -KILL -f adb
+  script: ant -buildfile ./test/build.xml clean emma debug install test
