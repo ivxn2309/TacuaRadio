@@ -1,0 +1,8 @@
+language: java
+
+
+# command to run tests
+before_script:
+   - mkdir bin
+
+script: 
