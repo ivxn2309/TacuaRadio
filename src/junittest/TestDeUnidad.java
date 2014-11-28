@@ -123,5 +123,39 @@ public class TestDeUnidad extends ActivityInstrumentationTestCase2<MainActivity>
         assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
     }
 
+     public void testMicroButtonLayout() {
+
+        ImageButton mClickMeButton = (ImageButton)
+                mFirstTestActivity
+                        .findViewById(R.id.imageButton4);
+
+        View decorView = mFirstTestActivity.getWindow().getDecorView();
+
+        ViewAsserts.assertOnScreen(decorView, mClickMeButton);
+
+        ViewGroup.LayoutParams layoutParams =
+                mClickMeButton.getLayoutParams();
+        assertNotNull(layoutParams);
+        assertEquals(layoutParams.width, WindowManager.LayoutParams.WRAP_CONTENT);
+        assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
+    }
+
+    public void testConfigButtonLayout() {
+
+        final ImageButton mClickMeButton = (ImageButton)
+                mFirstTestActivity
+                        .findViewById(R.id.imageButton5);
+
+        final View decorView = mFirstTestActivity.getWindow().getDecorView();
+
+        ViewAsserts.assertOnScreen(decorView, mClickMeButton);
+
+        final ViewGroup.LayoutParams layoutParams =
+                mClickMeButton.getLayoutParams();
+        assertNotNull(layoutParams);
+        assertEquals(layoutParams.width, WindowManager.LayoutParams.WRAP_CONTENT);
+        assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
+    }
+
 
 }
