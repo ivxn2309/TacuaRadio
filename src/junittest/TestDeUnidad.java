@@ -51,4 +51,20 @@ public class TestDeUnidad extends ActivityInstrumentationTestCase2<MainActivity>
         assertEquals("comparando el estado inicial del boton",expected,sActual);
     }
 
+    public void testSwitchOFF(){
+        final String expected = "OFF";
+        final Switch actual = (Switch)mFirstTestActivity.findViewById(R.id.power_button);
+        final String sActual = actual.getTextOff().toString();
+
+        assertEquals("comparando el estado Apagado del Switch",expected,sActual);
+    }
+
+    public void testSwitchON(){
+        final String expected = "ON";
+        final Switch actual = (Switch)mFirstTestActivity.findViewById(R.id.power_button);
+        final String sActual = actual.getTextOn().toString();
+
+        assertEquals("comparando el estado ON del Switch",expected,sActual);
+    }
+
 }
